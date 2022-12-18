@@ -4,9 +4,6 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import Container from './App.styled';
 import Button from './Button/Button'
-// import LoadMore from './Button/Button';
-// import Modal from './Modal/Modal';
-// import Loader from './Loader/Loader';
 
 
 class App extends Component {
