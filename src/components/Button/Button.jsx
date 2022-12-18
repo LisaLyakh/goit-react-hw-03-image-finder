@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import StyledButton from './Button.styled';
-import Image from '../ImageGallery'
+// import Image from '../ImageGallery'
 
 function LoadMore({ children, loadMore }) {
   return (
