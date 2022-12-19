@@ -22,7 +22,7 @@ class App extends Component {
         <Searchbar onSubmit={this.onSubmit} />
         <ToastContainer autoClose={3000} />
         <ImageGallery searchQuery={this.state.searchQuery} />
-        {images.length !== 0 && !loading && (
+        {images?.length !== 0 && !loading && (
           <Button LoadMore={this.LoadMore}
          />)}
       </Container>
