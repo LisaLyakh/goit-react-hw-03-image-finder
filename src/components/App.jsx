@@ -11,7 +11,7 @@ class App extends Component {
     searchQuery: '',
   };
 
-  handleFormSubmit = searchQuery => {
+  onSubmit = searchQuery => {
     this.setState({ searchQuery });
   };
 
