@@ -7,12 +7,14 @@ import Loader from 'components/Loader/Loader';
 import Button from '../Button/Button';
 import GalleyItem from '../ImageGalleryItem/ImageGalleryItem';
 import GalleryList from './ImageGallery.styled';
+ 
 
 export default class ImageGallery extends Component {
   state = {
     images: [],
     loading: false,
     page: 1,
+    totalHits: 1,
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
@@ -23,16 +25,21 @@ export default class ImageGallery extends Component {
       try {
         this.setState({ loading: true });
         const updatedImages = await getApiResult(searchQuery, updatePage);
-        if (updatedImages.length === 0) {
+        if (updatedImages.hits.length === 0) {
           toast('No results');
           this.setState({ loading: false });
         }
         if (prevProps.searchQuery !== searchQuery) {
-          this.setState({ images: updatedImages, page: 1 });
+          this.setState({
+            images: updatedImages.hits,
+            page: 1,
+            totalHits: updatedImages.totalHits,
+          });
         }
         if (prevState.page !== page && page !== 1) {
           this.setState({
-            images: [...this.state.images, ...updatedImages],
+            images: [...this.state.images, ...updatedImages.hits],
+            totalHits: updatedImages.totalHits,
           });
         }
       } catch (error) {
@@ -56,7 +63,7 @@ export default class ImageGallery extends Component {
   };
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, totalHits } = this.state;
     return (
       <>
         <GalleryList>
@@ -69,7 +76,7 @@ export default class ImageGallery extends Component {
             />
           ))}
         </GalleryList>
-        {images.length !== 0 && !loading && (
+        {images.length !== 0 && !loading && images.length !== totalHits && (
           <Button loadMore={this.onLoadMore} />
         )}
         {this.state.loading && <Loader />}
