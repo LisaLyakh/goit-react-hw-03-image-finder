@@ -8,9 +8,6 @@ function LoadMore({ children, loadMore }) {
       {children}
     </StyledButton>
   )
-  // if (Image.length === TotalHits) {
-  //   return;
-  // }
 }
 LoadMore.propTypes = {
   loadMore: PropTypes.func.isRequired,
